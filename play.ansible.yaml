@@ -1,32 +1,22 @@
 ---
 
-  - hosts: ubuntu
+  - hosts: linux
     
     
     tasks:
     - name: update apt cache
-      ansible.builtin.apt:
+      ansible.builtin.package:        
         update_cache: true
-      when: ansible_distribution == "Ubuntu"    
-    - name: install apache2
-      ansible.builtin.apt:
+          
+    - name: install apache2 and php_library
+      ansible.builtin.package:        
         state: latest
         name:
-          - net-tools
-          - curl
-      when: ansible_distribution == "Ubuntu"
+          - '{{ apache_sunucu }}'
+          - '{{ php_library }}'
+      
 
-  - hosts: centos
-    tasks:
-    - name: update cache in centos
-      ansible.builtin.dnf:
-        update_cache: yes
-    - name: install httpd
-      ansible.builtin.dnf:
-        state: latest
-        name:
-          - httpd
-
+  
     
   
         
