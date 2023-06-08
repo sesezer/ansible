@@ -5,17 +5,28 @@
     
     tasks:
     - name: update apt cache
-      ansible.builtin.package:        
-        update_cache: true
-          
+      ansible.builtin.package:
+        update_cache: yes
+        upgrade: dist
+      when: ansible_distribution == "Ubuntu"
+    - name: update & upgrade        
+      ansible.builtin.package:
+        update_cache: yes
+        update_only: yes
+      when: ansible_distribution == "CentOS"
+    
+      
+    - name: read vars
+      ansible.builtin.include_vars:
+        file: "vars/{{ ansible_distribution }}.yaml"
+
     - name: install apache2 and php_library
       ansible.builtin.package:        
         state: latest
         name:
-          - '{{ apache_sunucu }}'
+          - '{{ apache_server }}'
           - '{{ php_library }}'
-      
-
+        
   
     
   

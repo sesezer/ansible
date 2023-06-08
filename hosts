@@ -2,10 +2,10 @@
 ubuntu-c ansible_connection=local
 
 [ubuntu]
-ubuntu[1:3] apache_sunucu=apache2 php_library=libapache2-mod-php
+ubuntu[1:3] 
 
 [centos]
-centos[1:3] apache_sunucu=httpd php_library=php
+centos[1:3] 
 
 [linux:children]
 centos
