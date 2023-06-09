@@ -1,8 +1,7 @@
 # ---
 
   - hosts: linux
-    
-    
+    tags: always
     tasks:
     - name: update apt cache
       ansible.builtin.package:
@@ -18,14 +17,13 @@
       
 ########## build frontend
   - hosts: frontend
+    tags: frontend
     tasks:
-      - name: import vars
+      - name: import vars 
         ansible.builtin.include_vars:
           "vars/{{ ansible_distribution }}.yaml"
           
-      - name: build frontend
-        
-              
+      - name: build frontend             
         ansible.builtin.package:
           name:
             - '{{ apache_server }}'
@@ -33,14 +31,14 @@
       
 ######## build database  
   - hosts: database
+    tags: database
     tasks:
       - name: import vars
         ansible.builtin.include_vars:
           "vars/{{ ansible_distribution }}.yaml"
           
       - name: mariadb
-        
-              
+                      
         ansible.builtin.package:
           name:
             - '{{ mariadb }}'
@@ -48,14 +46,14 @@
 
 ######## build ftp server        
   - hosts: ftp_server
+    tags: ftp_server
+    
     tasks:
-      - name: import vars
+      - name: import vars    
         ansible.builtin.include_vars:
           "vars/{{ ansible_distribution }}.yaml"
           
-      - name: ftp server install
-        
-              
+      - name: ftp server install      
         ansible.builtin.package:
           name:
             - '{{ ftpserver }}'
