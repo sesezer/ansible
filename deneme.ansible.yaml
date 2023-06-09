@@ -1,0 +1,14 @@
+
+  
+  - hosts: controller
+    vars_files:
+      - vars/variables.yml
+    tasks:
+       
+      - name: debug
+        
+        ansible.builtin.debug:
+          msg: "{{ sezer }}"
+      
+        
+          

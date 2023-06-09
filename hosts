@@ -15,10 +15,10 @@ ansible_user=root
 
 [frontend] 
 ubuntu1 
-centos1 
+ubuntu2 
 
 [database]
-ubuntu2
+centos1
 
 [ftp_server]
 centos2
