@@ -1,2 +1,4 @@
 apache_server: apache2
 php_library: libapache2-mod-php
+mariadb: mariadb-server
+ftpserver: vsftpd

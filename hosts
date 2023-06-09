@@ -13,3 +13,13 @@ ubuntu
 [linux:vars]
 ansible_user=root
 
+[frontend] 
+ubuntu1 
+centos1 
+
+[database]
+ubuntu2
+
+[ftp_server]
+centos2
+

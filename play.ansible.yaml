@@ -1,4 +1,4 @@
----
+# ---
 
   - hosts: linux
     
@@ -16,18 +16,50 @@
       when: ansible_distribution == "CentOS"
     
       
-    - name: read vars
-      ansible.builtin.include_vars:
-        file: "vars/{{ ansible_distribution }}.yaml"
-
-    - name: install apache2 and php_library
-      ansible.builtin.package:        
-        state: latest
-        name:
-          - '{{ apache_server }}'
-          - '{{ php_library }}'
+########## build frontend
+  - hosts: frontend
+    tasks:
+      - name: import vars
+        ansible.builtin.include_vars:
+          "vars/{{ ansible_distribution }}.yaml"
+          
+      - name: build frontend
         
-  
+              
+        ansible.builtin.package:
+          name:
+            - '{{ apache_server }}'
+          state: latest
+      
+######## build database  
+  - hosts: database
+    tasks:
+      - name: import vars
+        ansible.builtin.include_vars:
+          "vars/{{ ansible_distribution }}.yaml"
+          
+      - name: mariadb
+        
+              
+        ansible.builtin.package:
+          name:
+            - '{{ mariadb }}'
+          state: latest
+
+######## build ftp server        
+  - hosts: ftp_server
+    tasks:
+      - name: import vars
+        ansible.builtin.include_vars:
+          "vars/{{ ansible_distribution }}.yaml"
+          
+      - name: ftp server install
+        
+              
+        ansible.builtin.package:
+          name:
+            - '{{ ftpserver }}'
+          state: latest
     
   
         
