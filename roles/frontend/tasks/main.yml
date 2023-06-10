@@ -1,0 +1,25 @@
+
+
+- name: vars
+  ansible.builtin.include_vars:
+     ../vars/variables.yml
+
+- name: vars
+  ansible.builtin.include_vars:
+     ../vars/{{ ansible_distribution }}.yaml
+       
+      
+
+    
+- name: build frontend             
+  ansible.builtin.package:
+    name:
+      - '{{ apache_server }}'
+    state: latest
+- name: copy weppage
+  ansible.builtin.copy:
+    src: "{{ source_path }}"
+    dest: "{{ destination_path }}"
+    group: root
+    owner: root
+    mode: 644

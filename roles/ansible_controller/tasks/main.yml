@@ -1,0 +1,14 @@
+
+
+
+- name: vars
+  ansible.builtin.include_vars:
+    ../vars/variables.yml
+
+         
+- name: git      
+  tags: git
+  ansible.builtin.git:
+    force: yes
+    repo: "{{ git_repo }}"
+    dest: "{{ git_destination }}"

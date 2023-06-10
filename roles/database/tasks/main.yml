@@ -1,0 +1,17 @@
+
+
+
+- name: import vars
+  ansible.builtin.include_vars:
+    ../vars/{{ ansible_distribution }}.yaml
+    
+- name: mariadb
+                
+  ansible.builtin.package:
+    name:
+      - '{{ mariadb }}'
+    state: latest
+- name: Start the service
+  ansible.builtin.systemd:
+    name: mariadb
+    state: started

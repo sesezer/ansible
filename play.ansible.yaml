@@ -17,70 +17,36 @@
 
   
   - hosts: controller
+    
     name: pull git weppage to local
-    vars_files: vars/variables.yml
-    tasks:      
-      - name: git
-        tags: git
-        ansible.builtin.git:
-          force: yes
-          repo: "{{ git_repo }}"
-          dest: "{{ git_destination }}"
+    roles: 
+      - ansible_controller
 
 
 #####################################################
 #################### build frontend ####################
   - hosts: frontend
-    tags: frontend
-    vars_files: vars/variables.yml
-    tasks:
-      - name: import vars 
-        ansible.builtin.include_vars:
-          "vars/{{ ansible_distribution }}.yaml"
-          
-      - name: build frontend             
-        ansible.builtin.package:
-          name:
-            - '{{ apache_server }}'
-          state: latest
-      - name: copy weppage
-        ansible.builtin.copy:
-          src: "{{ source_path }}"
-          dest: "{{ destination_path }}"
-          group: root
-          owner: root
-          mode: 644
+    name: build frontend from github
+    roles:
+      - frontend
 # ########################################################     
 # ################ build database #######################
-#   - hosts: database
-#     tags: database
-#     tasks:
-#       - name: import vars
-#         ansible.builtin.include_vars:
-#           "vars/{{ ansible_distribution }}.yaml"
-          
-#       - name: mariadb
-                      
-#         ansible.builtin.package:
-#           name:
-#             - '{{ mariadb }}'
-#           state: latest
+  - hosts: database
+    tags: database
+    name: create database
+    roles:
+      - database
+    
 # ########################################################
 # ################### build ftp server ################        
-#   - hosts: ftp_server
-#     tags: ftp_server
-    
-#     tasks:
-#       - name: import vars    
-#         ansible.builtin.include_vars:
-#           "vars/{{ ansible_distribution }}.yaml"
-          
-#       - name: ftp server install      
-#         ansible.builtin.package:
-#           name:
-#             - '{{ ftpserver }}'
-#           state: latest
+
+  - hosts: ftp_server
+    tags: ftp_server
+    name: create ftp_server
+    roles:
+      - ftp_server
     
   
+      
   
         

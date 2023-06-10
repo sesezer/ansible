@@ -1,0 +1,8 @@
+---
+######## for weppage ################
+source_path:  ./roles/files/weppage/
+destination_path: /var/www/html    #
+git_repo: https://github.com/gabrielecirulli/2048.git
+git_destination: ./roles/files/weppage
+
+

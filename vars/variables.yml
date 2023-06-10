@@ -1,8 +1,0 @@
----
-######## for weppage ################
-source_path:  /home/ansible/html
-destination_path: /var/www    #
-git_repo: https://github.com/gabrielecirulli/2048.git
-git_destination: ../2048
-
-
